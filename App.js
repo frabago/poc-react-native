@@ -40,7 +40,7 @@ export default class App extends React.Component {
 		/*var ds = new ListView.DataSource({
 			rowHasChanged: (r1, r2) => r1 !== r2
 		})*/
-
+  
 		this.state = {
 			status: false,
 			dataSource: []//ds.cloneWithRows([])
@@ -51,8 +51,6 @@ export default class App extends React.Component {
 				status: !this.state.status
 			})
 		}
-		//this.clicked = this.clicked.bind(this);
-		//this.renderRow = this.renderRow.bind(this);
 	}
 
 	componentDidMount() {
