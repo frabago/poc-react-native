@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Icon from "react-native-vector-icons/FontAwesome";
-import {ScrollView, Text, TextInput, View, Button, Image, StyleSheet} from 'react-native';
+import {ScrollView, Text, TextInput, View, Button, Image, StyleSheet, Picker} from 'react-native';
 import {login} from '../../actions/authorisation';
 
 class Login extends Component {
@@ -35,6 +35,13 @@ class Login extends Component {
 							value={this.state.username}
 							onChangeText={(text) => this.setState({username: text})} />
 					</View>
+					<Picker
+						selectedValue={this.state.language}
+						style={{ height: 50, width: 100 }}
+						onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+						<Picker.Item label="Java" value="java" />
+						<Picker.Item label="JavaScript" value="js" />
+					</Picker>
 					<View style={styles.sectionButton}>
 						<Button color='#02A397' style={styles.sectionButton} onPress={(e) => this.userLogin(e)} title="Entrar" />
 					</View>
