@@ -4,18 +4,42 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import {ScrollView, Text, TextInput, View, Button, Image, StyleSheet, Picker} from 'react-native';
 import {login} from '../../actions/authorisation';
 
+import users from './users.json';
+
 class Login extends Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 
 		this.state = {
 			username: null,
+			usersArray: null,
 		};
 	}
 
-	userLogin (e) {
+	userLogin(e) {
 		this.props.onLogin(this.state.username);
 		e.preventDefault();
+	}
+
+	getUsers() {
+		//return fetch('https://facebook.github.io/react-native/movies.json')
+		//.then((response) => response.json())
+		//.then((responseJson) => {
+			const usersArray = [];
+			users.map((user, i) => {
+				usersArray.push(
+					<Picker.Item key={i} label={user.name} value={user.name} />
+				)
+			})
+			this.setState({usersArray: usersArray});
+		//})
+		//.catch((error) => {
+		//	console.error(error);
+		//});
+	}
+
+	componentWillMount() {
+		this.getUsers();
 	}
 
 	render() {
@@ -25,23 +49,14 @@ class Login extends Component {
 				<View style={styles.container}>
 					<View style={styles.section}>
 						<Icon style={styles.sectionIcon} name='user' size={20} />
-						<TextInput
-							style={styles.sectionInput}
-							placeholder='Usuario'
-							autoCapitalize='none'
-							autoCorrect={false}
-							autoFocus={true}
-							keyboardType='email-address'
-							value={this.state.username}
-							onChangeText={(text) => this.setState({username: text})} />
+						<Picker
+							selectedValue={this.state.username}
+							style={styles.sectionPicker}
+							mode='dialog'
+							onValueChange={(itemValue, itemIndex) => this.setState({username: itemValue})}>
+								{this.state.usersArray}
+						</Picker>
 					</View>
-					<Picker
-						selectedValue={this.state.language}
-						style={{ height: 50, width: 100 }}
-						onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-						<Picker.Item label="Java" value="java" />
-						<Picker.Item label="JavaScript" value="js" />
-					</Picker>
 					<View style={styles.sectionButton}>
 						<Button color='#02A397' style={styles.sectionButton} onPress={(e) => this.userLogin(e)} title="Entrar" />
 					</View>
@@ -88,7 +103,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		color: '#d6d7da',
 	},
-	sectionInput: {
+	sectionPicker: {
 		flex: 1,
 		paddingTop: 10,
 		paddingRight: 10,
