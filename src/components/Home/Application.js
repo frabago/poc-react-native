@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Login from '../Login/Login';
-import Secured from '../Login/Secured';
+import Roles from '../Login/Roles';
 
 class Application extends Component {
 	render() {
 		if (this.props.isLoggedIn) {
-			return <Secured />;
+			return <Roles />;
 		} else {
 			return <Login />;
 		}

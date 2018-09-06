@@ -58,7 +58,7 @@ class Login extends Component {
 						</Picker>
 					</View>
 					<View style={styles.sectionButton}>
-						<Button color='#02A397' style={styles.sectionButton} onPress={(e) => this.userLogin(e)} title="Entrar" />
+						<Button color='#02A397' onPress={(e) => this.userLogin(e)} title="Entrar" />
 					</View>
 				</View>
 			</ScrollView>
@@ -110,10 +110,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 10,
 		paddingLeft: 10,
 		color: 'black',
-	},
-	sectionButton: {
-		margin: 20,
-	},
+	}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
